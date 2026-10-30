@@ -1756,12 +1756,14 @@
 (() => {
   // Cole a URL /exec da implantação do Apps Script.
   const ENDPOINT = 'https://script.google.com/macros/s/AKfycbzJpOoabN_9b_rcA1imWBtjGK_YCvhpytoGLMEZVOVmL-7PKVsPV_WfKeEtjB_dvKc06A/exec';
+  const THANK_YOU_URL = './obrigado.html';
   const form = document.getElementById('diagnostico-form');
   const status = document.getElementById('form-status');
   const button = form.querySelector('button');
   let started = false;
   let pending = null;
   let timer;
+  let completed = false;
   const track = event => {
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push({event, form_id:'diagnostico_ecommerce'});
@@ -1771,20 +1773,60 @@
     boxes[0].setCustomValidity(boxes.some(b=>b.checked)?'':'Selecione pelo menos uma situação.');
     if (!started) {started=true;track('diagnostico_form_start');}
   });
+  const normalizeName = value => value.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z\s]/g,'').replace(/\s+/g,' ').trim();
+  const normalizePhone = value => {
+    const digits = value.replace(/\D/g,'');
+    if(value.trim().startsWith('+') && /^[1-9]\d{7,14}$/.test(digits)) return digits;
+    // Números locais brasileiros precisam incluir DDD.
+    if(/^[1-9]\d{9,10}$/.test(digits)) return '55'+digits;
+    if(/^55[1-9]\d{9,10}$/.test(digits)) return digits;
+    return '';
+  };
+  const completeLead = lead => {
+    let navigated = false;
+    const navigate = () => {
+      if(navigated) return;
+      navigated = true;
+      // Limpa os dados de correspondência antes de sair da página.
+      window.dataLayer.push({meta_user_data:null,lead_data:null});
+      window.location.assign(new URL(THANK_YOU_URL, window.location.href).href);
+    };
+    const parts = normalizeName(lead.nome).split(' ').filter(Boolean);
+    const matching = {em:lead.email.trim().toLowerCase()};
+    const phone = normalizePhone(lead.telefone);
+    if(phone) matching.ph = phone;
+    if(parts.length) matching.fn = parts[0];
+    if(parts.length>1) matching.ln = parts.slice(1).join(' ');
+    window.dataLayer = window.dataLayer || [];
+    // O evento de mensuração não leva dados de contato.
+    window.dataLayer.push({meta_user_data:null,lead_data:null});
+    window.dataLayer.push({event:'generate_lead',form_id:'diagnostico_ecommerce',event_id:lead.request_id});
+    // Limite de espera também funciona se o GTM estiver bloqueado.
+    setTimeout(navigate,1600);
+    window.dataLayer.push({
+      event:'meta_lead',form_id:'diagnostico_ecommerce',event_id:lead.request_id,
+      meta_user_data:matching,
+      lead_data:{investimento_mensal:lead.investimento,situacoes:JSON.parse(lead.situacoes)},
+      eventCallback:navigate,eventTimeout:1200
+    });
+  };
   const finish = (message, success) => {
     clearTimeout(timer);
     status.textContent = message;
     button.disabled = false;
     if (success) {
-      track('generate_lead');
+      completed = true;
+      button.disabled = true;
+      const lead = pending;
       form.reset();
       started = false;
       pending = null;
+      completeLead(lead);
     }
   };
   // A confirmação contém apenas um identificador aleatório e o estado da gravação.
   window.diagnosticoAck = result => {
-    if (!pending || result.id !== pending.request_id) return;
+    if (completed || !pending || result.id !== pending.request_id) return;
     if (result.saved) finish('Solicitação recebida! Vou analisar suas informações e entrar em contato com os perfis selecionados.', true);
   };
   async function checkSaved(deadline) {
@@ -1801,6 +1843,7 @@
   }
   form.addEventListener('submit', async event => {
     event.preventDefault();
+    if(completed || button.disabled) return;
     const boxes = [...form.querySelectorAll('[name="situacoes"]')];
     boxes[0].setCustomValidity(boxes.some(b=>b.checked)?'':'Selecione pelo menos uma situação.');
     if(!form.reportValidity()) return;
