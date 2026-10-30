@@ -1,5 +1,8 @@
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-M5XRQMWS');</script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#17191a">
@@ -10,20 +13,6 @@
     name="description"
     content="Já investe em Meta Ads ou Google Ads? Entenda o que está impedindo seu e-commerce de ter resultados melhores e saiba onde agir com segurança."
   >
-
-  <!-- Insira aqui o ID do seu GTM -->
-<!-- Google Tag Manager -->
-<script>
-(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({
-'gtm.start':new Date().getTime(),event:'gtm.js'});
-var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
-j.async=true;
-j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
-f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-M5XRQMWS');
-</script>
-<!-- End Google Tag Manager -->
 
   <style>
     :root {
@@ -906,23 +895,28 @@ f.parentNode.insertBefore(j,f);
         transition: none;
       }
     }
-  </style>
+  
+#solicitar-diagnostico {scroll-margin-top:24px;max-width:900px}
+#diagnostico-form fieldset {border:0;padding:0;margin:32px 0}
+#diagnostico-form legend {font-weight:800;line-height:1.5;margin-bottom:14px}
+.form-choice {display:flex;align-items:flex-start;gap:12px;border:1px solid var(--line);border-radius:6px;padding:16px;margin-bottom:10px;cursor:pointer;line-height:1.5}
+.form-choice:has(input:checked) {border-color:var(--orange);background:#fff7f1}
+.form-choice input {margin-top:5px;accent-color:var(--orange);flex:none;width:18px;height:18px}
+.form-contact {display:grid;gap:20px;margin-bottom:26px}
+.form-contact label {display:grid;gap:9px;font-weight:700}
+.form-contact input {width:100%;padding:15px;border:1px solid #aeb4b2;border-radius:6px;font:inherit;background:white;color:var(--ink)}
+#diagnostico-form input:focus-visible {outline:3px solid #00a6a6;outline-offset:3px}
+#diagnostico-form button {border:0;cursor:pointer;font-family:inherit}
+#diagnostico-form button:disabled {opacity:.65;cursor:wait}
+.form-trap {position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}
+#form-status {min-height:28px} .form-help {margin-top:0}
+
+</style>
 </head>
 
 <body>
 
-  <!-- GTM NOSCRIPT -->
-<!-- Google Tag Manager (noscript) -->
-<noscript>
-  <iframe
-    src="https://www.googletagmanager.com/ns.html?id=GTM-M5XRQMWS"
-    height="0"
-    width="0"
-    style="display:none;visibility:hidden">
-  </iframe>
-</noscript>
-<!-- End Google Tag Manager (noscript) -->
-
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M5XRQMWS" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- HEADER -->
 
   <header class="topbar wrap">
@@ -944,7 +938,7 @@ f.parentNode.insertBefore(j,f);
 
     <a
       class="button"
-      href="https://forms.gle/TfcDCsXTpqZsLA7i7"
+      href="#solicitar-diagnostico"
     >
       Solicitar diagnóstico
       <span class="arrow" aria-hidden="true">↗</span>
@@ -1023,7 +1017,7 @@ f.parentNode.insertBefore(j,f);
 
                 <a
                   class="button"
-                  href="https://forms.gle/TfcDCsXTpqZsLA7i7"
+                  href="#solicitar-diagnostico"
                 >
                   Quero solicitar meu diagnóstico
                   <span class="arrow" aria-hidden="true">↗</span>
@@ -1089,7 +1083,7 @@ f.parentNode.insertBefore(j,f);
 
             <a
               class="button"
-              href="https://forms.gle/TfcDCsXTpqZsLA7i7"
+              href="#solicitar-diagnostico"
             >
               Quero solicitar meu diagnóstico
               <span class="arrow" aria-hidden="true">↗</span>
@@ -1386,7 +1380,7 @@ f.parentNode.insertBefore(j,f);
 
         <a
           class="button"
-          href="https://forms.gle/TfcDCsXTpqZsLA7i7"
+          href="#solicitar-diagnostico"
         >
           Solicitar meu diagnóstico
           <span class="arrow" aria-hidden="true">↗</span>
@@ -1535,7 +1529,7 @@ f.parentNode.insertBefore(j,f);
 
           <a
             class="button"
-            href="https://forms.gle/TfcDCsXTpqZsLA7i7"
+            href="#solicitar-diagnostico"
           >
             Quero solicitar meu diagnóstico
             <span class="arrow" aria-hidden="true">↗</span>
@@ -1576,7 +1570,32 @@ f.parentNode.insertBefore(j,f);
     </section>
 
 
-    <!-- FAQ -->
+  
+<section class="section wrap" id="solicitar-diagnostico">
+ <span class="eyebrow">Solicite seu diagnóstico</span>
+ <h2>Conte um pouco sobre sua loja.</h2>
+ <p>Vou analisar sua solicitação e entrar em contato pelo WhatsApp com os lojistas selecionados. Todos os campos são obrigatórios.</p>
+ <form id="diagnostico-form">
+  <fieldset><legend>Hoje, quanto seu e-commerce investe por mês em Meta Ads e Google Ads?</legend><label class="form-choice"><input type="radio" name="investimento" value="Ainda não invisto em anúncios" required><span>Ainda não invisto em anúncios</span></label>
+<label class="form-choice"><input type="radio" name="investimento" value="Até R$ 3.000 por mês" required><span>Até R$ 3.000 por mês</span></label>
+<label class="form-choice"><input type="radio" name="investimento" value="De R$ 3.001 a R$ 10.000 por mês" required><span>De R$ 3.001 a R$ 10.000 por mês</span></label>
+<label class="form-choice"><input type="radio" name="investimento" value="De R$ 10.001 a R$ 30.000 por mês" required><span>De R$ 10.001 a R$ 30.000 por mês</span></label>
+<label class="form-choice"><input type="radio" name="investimento" value="Mais de R$ 30.000 por mês" required><span>Mais de R$ 30.000 por mês</span></label></fieldset>
+  <fieldset><legend>Hoje, qual dessas situações mais acontece na sua loja?</legend><p class="form-help">Selecione uma ou mais opções.</p><label class="form-choice"><input type="checkbox" name="situacoes" value="Tenho Pixel/API instalados, mas não sei se os dados estão chegando corretamente" ><span>Tenho Pixel/API instalados, mas não sei se os dados estão chegando corretamente</span></label>
+<label class="form-choice"><input type="checkbox" name="situacoes" value="Meta Ads, Google Ads e Google Analytics mostram resultados diferentes e não sei exatamente em quais números confiar" ><span>Meta Ads, Google Ads e Google Analytics mostram resultados diferentes e não sei exatamente em quais números confiar</span></label>
+<label class="form-choice"><input type="checkbox" name="situacoes" value="Quero entender melhor o que acontece com o cliente dentro da loja, do acesso até a compra" ><span>Quero entender melhor o que acontece com o cliente dentro da loja, do acesso até a compra</span></label>
+<label class="form-choice"><input type="checkbox" name="situacoes" value="Já acompanho tudo, mas quero validar se minha configuração pode ser melhorada" ><span>Já acompanho tudo, mas quero validar se minha configuração pode ser melhorada</span></label></fieldset>
+  <div class="form-contact">
+   <label>Nome<input name="nome" autocomplete="name" required maxlength="160"></label>
+   <label>E-mail<input type="email" name="email" autocomplete="email" required maxlength="254"></label>
+   <label>Número de telefone<input type="tel" name="telefone" autocomplete="tel" required maxlength="40"></label>
+  </div>
+  <div class="form-trap" aria-hidden="true"><label>Deixe vazio<input name="website_check" tabindex="-1" autocomplete="off"></label></div>
+  <button class="button" type="submit">Quero solicitar meu diagnóstico <span aria-hidden="true">↗</span></button>
+  <p id="form-status" role="status" aria-live="polite"></p>
+ </form>
+</section>
+  <!-- FAQ -->
 
     <section class="section wrap faq">
 
@@ -1733,5 +1752,82 @@ f.parentNode.insertBefore(j,f);
 
   </script>
 
+<script>
+(() => {
+  // Cole a URL /exec da implantação do Apps Script.
+  const ENDPOINT = 'https://script.google.com/macros/s/AKfycbzJpOoabN_9b_rcA1imWBtjGK_YCvhpytoGLMEZVOVmL-7PKVsPV_WfKeEtjB_dvKc06A/exec';
+  const form = document.getElementById('diagnostico-form');
+  const status = document.getElementById('form-status');
+  const button = form.querySelector('button');
+  let started = false;
+  let pending = null;
+  let timer;
+  const track = event => {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({event, form_id:'diagnostico_ecommerce'});
+  };
+  form.addEventListener('change', () => {
+    const boxes = [...form.querySelectorAll('[name="situacoes"]')];
+    boxes[0].setCustomValidity(boxes.some(b=>b.checked)?'':'Selecione pelo menos uma situação.');
+    if (!started) {started=true;track('diagnostico_form_start');}
+  });
+  const finish = (message, success) => {
+    clearTimeout(timer);
+    status.textContent = message;
+    button.disabled = false;
+    if (success) {
+      track('generate_lead');
+      form.reset();
+      started = false;
+      pending = null;
+    }
+  };
+  // A confirmação contém apenas um identificador aleatório e o estado da gravação.
+  window.diagnosticoAck = result => {
+    if (!pending || result.id !== pending.request_id) return;
+    if (result.saved) finish('Solicitação recebida! Vou analisar suas informações e entrar em contato com os perfis selecionados.', true);
+  };
+  async function checkSaved(deadline) {
+    if (!pending || !button.disabled) return;
+    if (Date.now()>deadline) {
+      finish('Não foi possível confirmar o recebimento. Aguarde um momento e tente novamente; manteremos o mesmo identificador para evitar duplicidade.', false);
+      return;
+    }
+    const script = document.createElement('script');
+    script.src = ENDPOINT+'?action=status&id='+encodeURIComponent(pending.request_id)+'&_='+Date.now();
+    script.onload = script.onerror = () => script.remove();
+    document.head.appendChild(script);
+    timer = setTimeout(()=>checkSaved(deadline),2500);
+  }
+  form.addEventListener('submit', async event => {
+    event.preventDefault();
+    const boxes = [...form.querySelectorAll('[name="situacoes"]')];
+    boxes[0].setCustomValidity(boxes.some(b=>b.checked)?'':'Selecione pelo menos uma situação.');
+    if(!form.reportValidity()) return;
+    if (!ENDPOINT) {status.textContent='O formulário ainda está em configuração. O envio será liberado após conectar a planilha.';return;}
+    const fd = new FormData(form);
+    if(fd.get('website_check')) return;
+    // Em caso de resposta incerta, uma nova tentativa reutiliza o mesmo envio.
+    if (!pending) {
+      const query = new URLSearchParams(location.search);
+      pending = {
+        request_id:crypto.randomUUID(),
+        nome:fd.get('nome').trim(),email:fd.get('email').trim(),telefone:fd.get('telefone').trim(),
+        investimento:fd.get('investimento'),situacoes:JSON.stringify(fd.getAll('situacoes')),
+        website_check:'',page:location.origin+location.pathname,
+        ...Object.fromEntries(['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].map(k=>[k,(query.get(k)||'').slice(0,500)]))
+      };
+    }
+    button.disabled=true;
+    status.textContent='Enviando sua solicitação…';
+    try {
+      // no-cors não confirma a gravação. Apenas a consulta de status libera o sucesso.
+      await fetch(ENDPOINT,{method:'POST',mode:'no-cors',body:new URLSearchParams(pending),credentials:'omit'});
+    } catch (_) { /* A consulta verifica se o servidor recebeu apesar da falha de rede. */ }
+    checkSaved(Date.now()+45000);
+  });
+})();
+
+</script>
 </body>
 </html>
