@@ -12,31 +12,18 @@
   >
 
   <!-- Insira aqui o ID do seu GTM -->
-  <script>
-    window.GTM_ID = "";
-  </script>
-
-  <script>
-    (function () {
-      var id = window.GTM_ID;
-
-      if (!/^GTM-[A-Z0-9]+$/i.test(id || "")) return;
-
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({
-        "gtm.start": new Date().getTime(),
-        event: "gtm.js"
-      });
-
-      var script = document.createElement("script");
-      script.async = true;
-      script.src =
-        "https://www.googletagmanager.com/gtm.js?id=GTM-M5XRQMWS"+
-        encodeURIComponent(id);
-
-      document.head.appendChild(script);
-    })();
-  </script>
+<!-- Google Tag Manager -->
+<script>
+(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({
+'gtm.start':new Date().getTime(),event:'gtm.js'});
+var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
+j.async=true;
+j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-M5XRQMWS');
+</script>
+<!-- End Google Tag Manager -->
 
   <style>
     :root {
@@ -925,31 +912,16 @@
 <body>
 
   <!-- GTM NOSCRIPT -->
-  <div id="gtm-noscript"></div>
-
-  <script>
-    if (/^GTM-[A-Z0-9]+$/i.test(window.GTM_ID || "")) {
-
-      var frame = document.createElement("iframe");
-
-      frame.src =
-        "https://www.googletagmanager.com/gtm.js?id=GTM-M5XRQMWS" +
-        encodeURIComponent(window.GTM_ID);
-
-      frame.height = "0";
-      frame.width = "0";
-
-      frame.style.cssText =
-        "display:none;visibility:hidden";
-
-      frame.title = "Google Tag Manager";
-
-      document
-        .getElementById("gtm-noscript")
-        .appendChild(frame);
-    }
-  </script>
-
+<!-- Google Tag Manager (noscript) -->
+<noscript>
+  <iframe
+    src="https://www.googletagmanager.com/ns.html?id=GTM-M5XRQMWS"
+    height="0"
+    width="0"
+    style="display:none;visibility:hidden">
+  </iframe>
+</noscript>
+<!-- End Google Tag Manager (noscript) -->
 
   <!-- HEADER -->
 
