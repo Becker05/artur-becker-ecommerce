@@ -911,6 +911,21 @@
 .form-trap {position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}
 #form-status {min-height:28px} .form-help {margin-top:0}
 
+
+/* CTA fixo: reserva espaço para não cobrir o final da página. */
+body.has-floating-diagnostic { padding-bottom: calc(100px + env(safe-area-inset-bottom, 0px)); }
+.floating-diagnostic {
+  position: fixed; inset: auto 0 0; z-index: 1000;
+  padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0px));
+  background: rgba(23, 25, 26, .97);
+  border-top: 1px solid rgba(255,255,255,.12);
+  box-shadow: 0 -8px 28px rgba(0,0,0,.16);
+  text-align: center;
+}
+.floating-diagnostic[hidden] { display: none; }
+.floating-diagnostic .button { width: min(100%, 460px); min-height: 58px; font-size: 1rem; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
 </style>
 </head>
 
@@ -1872,5 +1887,53 @@
 })();
 
 </script>
+
+<!-- Visível apenas quando os CTAs originais e o formulário estão fora da tela. -->
+<div class="floating-diagnostic" id="floating-diagnostic" hidden>
+  <a class="button" href="#solicitar-diagnostico">Quero solicitar meu diagnóstico <span class="arrow" aria-hidden="true">↗</span></a>
+</div>
+
+<script>
+(() => {
+  const bar = document.getElementById('floating-diagnostic');
+  const formSection = document.getElementById('solicitar-diagnostico');
+  if (!bar || !formSection) return;
+  const originalButtons = [...document.querySelectorAll('a.button[href="#solicitar-diagnostico"]')].filter(el => !bar.contains(el));
+  document.body.classList.add('has-floating-diagnostic');
+  let scheduled = false;
+  function visible(el) {
+    const rect = el.getBoundingClientRect();
+    const height = document.documentElement.clientHeight;
+    const width = document.documentElement.clientWidth;
+    if (!rect.width || !rect.height || rect.bottom <= 0 || rect.top >= height || rect.right <= 0 || rect.left >= width) return false;
+    for (let node = el; node && node.nodeType === 1; node = node.parentElement) {
+      const style = getComputedStyle(node);
+      if (style.display === 'none' || style.visibility !== 'visible' || Number(style.opacity) === 0) return false;
+    }
+    return true;
+  }
+  function update() {
+    scheduled = false;
+    // Ao preencher o formulário, o CTA não disputa espaço com os campos.
+    const hide = originalButtons.some(visible) || visible(formSection);
+    // Evita retirar do teclado um link que está sendo usado.
+    bar.hidden = hide && !bar.contains(document.activeElement);
+  }
+  function schedule() {
+    if (!scheduled) { scheduled = true; requestAnimationFrame(update); }
+  }
+  window.addEventListener('scroll', schedule, { passive: true });
+  window.addEventListener('resize', schedule);
+  window.addEventListener('pageshow', schedule);
+  document.addEventListener('transitionend', schedule);
+  bar.addEventListener('focusout', schedule);
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(schedule, { threshold: [0, 1] });
+    [...originalButtons, formSection].forEach(el => observer.observe(el));
+  }
+  update();
+})();
+</script>
+
 </body>
 </html>
