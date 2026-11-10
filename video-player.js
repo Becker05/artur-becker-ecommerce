@@ -36,6 +36,8 @@ function renderVideo(slot, config) {
   frame.appendChild(player);
   slot.appendChild(frame);
   slot.hidden = false;
+  const section = slot.closest('[data-video-required]');
+  if (section) section.hidden = false;
 }
 for (const slot of document.querySelectorAll('[data-lp2-video]')) {
   renderVideo(slot, window.LP2_VIDEOS?.[slot.dataset.lp2Video] || {});
