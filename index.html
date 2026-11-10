@@ -517,10 +517,6 @@
        FAQ
     ========================== */
 
-    .faq {
-      max-width: 900px;
-    }
-
     .faq details {
       border-top: 1px solid var(--line);
       padding: 20px 0;
@@ -896,7 +892,7 @@
       }
     }
 
-#solicitar-diagnostico {scroll-margin-top:24px;max-width:900px}
+#solicitar-diagnostico {scroll-margin-top:24px}
 #diagnostico-form fieldset {border:0;padding:0;margin:32px 0}
 #diagnostico-form legend {font-weight:800;line-height:1.5;margin-bottom:14px}
 .form-choice {display:flex;align-items:flex-start;gap:12px;border:1px solid var(--line);border-radius:6px;padding:16px;margin-bottom:10px;cursor:pointer;line-height:1.5}
@@ -936,10 +932,9 @@ body.has-floating-diagnostic { padding-bottom: calc(100px + env(safe-area-inset-
 #inicio h1 { max-width: none; font-size: clamp(2rem, 4.4vw, 4.6rem); }
 #inicio .hero-avatar { float:right; width:clamp(64px, 9vw, 112px); height:auto; aspect-ratio:1; object-fit:cover; object-position:center 24%; border-radius:50%; margin:0 0 12px 16px; }
 #inicio .hero-authority { clear:both; margin-block:24px; }
-#solicitar-diagnostico h2 { max-width: 24ch; }
 #diagnostico-form .form-contact { grid-template-columns: 1fr; gap: 12px; margin-bottom: 18px; }
 #diagnostico-form select { width:100%; padding:15px; border:1px solid #aeb4b2; border-radius:6px; font:inherit; background:white; color:var(--ink); }
-.preview-video video { display:block; width:100%; max-width:720px; aspect-ratio:16/9; border-radius:6px; background:#0d0f10; margin:16px 0; }
+.preview-video video { display:block; width:100%; aspect-ratio:16/9; border-radius:6px; background:#0d0f10; margin:16px 0; }
 
 main > .hero,
 main > .section,
@@ -948,17 +943,19 @@ main > .section + .section,
 main > .conversion + .section { border-top: 1px solid var(--line); }
 main > .section h2,
 main > .conversion h2 { margin-block: 10px 18px; line-height: 1.12; text-wrap: balance; }
-main > .section .intro,
-main > .preview-video > p,
 main > .conversion p { max-width: 70ch; }
 main > .section p + p { margin-top: 12px; }
 #inicio h1 { max-width: 26ch; margin-block: 14px 24px; text-wrap: balance; }
 #inicio .lead { max-width: 70ch; }
 #inicio .hero-authority { margin-block: 20px; }
 .preview-video .opening-video-frame,
-.preview-video video { width: 100%; max-width: 720px; margin-block: 18px; }
+.preview-video video { width: 100%; margin-block: 18px; }
 #solicitar-diagnostico { scroll-margin-top: 90px; }
-#diagnostico-form { max-width: 640px; margin-inline: 0; }
+main > .section.wrap .intro,
+main > .section.wrap h2,
+main > .section.wrap > p,
+main > .section.wrap .checks,
+#diagnostico-form { max-width: none; }
 @media (max-width: 640px) {
   #inicio h1 { font-size: clamp(1.85rem, 7vw, 2.6rem); text-wrap: initial; }
   main .button { max-width: 100%; white-space: normal; text-align: center; }
@@ -1065,15 +1062,6 @@ main > .section p + p { margin-top: 12px; }
   <p><a class="button" href="#solicitar-diagnostico">Quero solicitar meu diagnóstico gratuito</a></p>
 </section>
 
-
-    <!-- O QUE PODE ESTAR ACONTECENDO -->
-<section class="section soft">
-  <div class="wrap intro">
-    <span class="eyebrow">O que pode estar acontecendo</span>
-    <h2>Os números da loja e dos anúncios são diferentes?</h2>
-    <p>Uma diferença pode vir da forma como cada ferramenta atribui as vendas ou de uma falha no registro. A investigação ajuda a distinguir esses casos.</p>
-  </div>
-</section>
 
     <!-- O QUE VOCÊ LEVA -->
 
@@ -1303,7 +1291,7 @@ main > .section p + p { margin-top: 12px; }
   <section class="section wrap" id="solicitar-diagnostico">
   <span class="eyebrow">Diagnóstico gratuito</span>
       <h2>Como funciona o diagnóstico gratuito?</h2>
-    <ol style="max-width:64ch; padding-inline-start:1.5rem; margin:12px 0 24px">
+    <ol style="padding-inline-start:1.5rem; margin:12px 0 24px">
       <li>Preencha um formulário rápido com seus dados e sua principal dúvida.</li>
       <li>Entrarei em contato pelo WhatsApp para agendarmos uma reunião.</li>
       <li>Na reunião, vamos avaliar o cenário da sua loja, identificar possíveis inconsistências e conversar sobre os próximos passos.</li>
