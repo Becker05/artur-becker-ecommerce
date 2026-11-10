@@ -1,6 +1,6 @@
-(() => {
-  const slot = document.getElementById('opening-video');
-  const config = window.OPENING_VIDEO || {};
+function renderVideo(slot, config) {
+
+
   if (!slot || !String(config.url || '').trim()) return;
   let url;
   try { url = new URL(config.url, window.location.href); } catch { return; }
@@ -19,12 +19,13 @@
     player.allow = 'accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
     player.referrerPolicy = 'strict-origin-when-cross-origin';
     player.allowFullscreen = true;
+    player.loading = 'lazy';
   } else if (/\.mp4$/i.test(url.pathname)) {
     player = document.createElement('video');
     player.src = url.href;
     player.controls = true;
     player.playsInline = true;
-    player.preload = 'metadata';
+    player.preload = 'none';
     player.setAttribute('aria-label', config.title || 'Vídeo de Artur Becker');
   } else { return; }
   player.width = 1280;
@@ -35,4 +36,7 @@
   frame.appendChild(player);
   slot.appendChild(frame);
   slot.hidden = false;
-})();
+}
+for (const slot of document.querySelectorAll('[data-lp2-video]')) {
+  renderVideo(slot, window.LP2_VIDEOS?.[slot.dataset.lp2Video] || {});
+}

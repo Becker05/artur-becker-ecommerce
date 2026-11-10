@@ -1,16 +1,9 @@
-# Como inserir ou trocar o vídeo de abertura
+# Vídeos da LP2
 
-1. Abra o arquivo video-config.js no GitHub.
-2. Clique no lápis para editar.
-3. No campo url, cole o link do YouTube entre as aspas. Também é aceita uma URL de arquivo MP4.
-4. Atualize title com o título do vídeo.
-5. Salve com Commit changes na branch main e aguarde o GitHub Pages publicar.
+Em `video-config.js`, preencha `ga4.url` e `pixel.url` com os links aprovados do YouTube ou de arquivos MP4 em HTTPS. Os players ficam ocultos enquanto as URLs estiverem vazias. Os arquivos originais continuam disponíveis na prévia local.
 
-Exemplo de estrutura (substitua pelo seu link real):
+# Antes de publicar
 
-window.OPENING_VIDEO = {
-  url: 'COLE_AQUI_O_LINK_DO_VIDEO',
-  title: 'Título do novo vídeo'
-};
+Aplique `Code.gs` ao Apps Script existente, preservando o ID da planilha e o nome da aba configurados. Reimplante na mesma URL e verifique um envio de três campos até a planilha e a página de obrigado. A dificuldade é armazenada na coluna Situações.
 
-Para retirar o vídeo, deixe url: ''. O bloco desaparece, sem espaço vazio. O player é responsivo, não tem reprodução automática e fica no mesmo ponto da abertura. A configuração é feita no repositório; não existe campo de edição exposto aos visitantes.
+Esta revisão está em uma branch separada. O GitHub Pages serve a branch main.
