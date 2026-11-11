@@ -1446,13 +1446,31 @@ main > .section.wrap .checks,
     }
     if (!ENDPOINT) {status.textContent='O formulário ainda está em configuração. O envio será liberado após conectar a planilha.';return;}
     const fd = new FormData(form);
-    if(fd.get('website_check')) return;
+    if (fd.get('website_check')) {
+      status.textContent = 'Confira os campos e tente novamente.';
+      return;
+    }
+    const nome = fd.get('nome').trim();
+    const telefone = fd.get('telefone').trim();
+    if (!nome || !/^(?:55)?[1-9]\d{9,10}$/.test(telefone.replace(/\D/g,''))) {
+      status.textContent = 'Confira seu nome e informe o WhatsApp com DDD.';
+      return;
+    }
+    const requestId = () => {
+      if (typeof crypto.randomUUID === 'function') return crypto.randomUUID();
+      const bytes = crypto.getRandomValues(new Uint8Array(16));
+      bytes[6] = (bytes[6] & 15) | 64;
+      bytes[8] = (bytes[8] & 63) | 128;
+      return Array.from(bytes, (byte, index) =>
+        ([4, 6, 8, 10].includes(index) ? '-' : '') + byte.toString(16).padStart(2, '0')
+      ).join('');
+    };
     // Em caso de resposta incerta, uma nova tentativa reutiliza o mesmo envio.
     if (!pending) {
       const query = new URLSearchParams(location.search);
       pending = {
-        request_id:crypto.randomUUID(),
-        form_version:'lp2_v2',nome:fd.get('nome').trim(),telefone:fd.get('telefone').trim(),
+        request_id:requestId(),
+        form_version:'lp2_v2',nome,telefone,
         dificuldade:fd.get('dificuldade'),
         website_check:'',page:location.origin+location.pathname,
         ...Object.fromEntries(['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].map(k=>[k,(query.get(k)||'').slice(0,500)]))
@@ -1462,7 +1480,7 @@ main > .section.wrap .checks,
     status.textContent='Enviando sua solicitação…';
     try {
       // no-cors não confirma a gravação. Apenas a consulta de status libera o sucesso.
-      await fetch(ENDPOINT,{method:'POST',mode:'no-cors',body:new URLSearchParams(pending),credentials:'omit'});
+      fetch(ENDPOINT,{method:'POST',mode:'no-cors',body:new URLSearchParams(pending),credentials:'omit'}).catch(() => {});
     } catch (_) { /* A consulta verifica se o servidor recebeu apesar da falha de rede. */ }
     checkSaved(Date.now()+45000);
   });
