@@ -34,7 +34,7 @@ function doPost(e) {
     const validPhone = p.telefone && p.telefone.length <= 40 && /^(?:55)?[1-9]\d{9,10}$/.test(p.telefone.replace(/\D/g, ''));
     if (!validId(p.request_id) || p.website_check) throw new Error('Dados inválidos');
     if (simple) {
-      if (!validName || !validPhone || !difficulties.includes(p.dificuldade)) throw new Error('Dados inválidos');
+      if (!validName || !validPhone || (p.email && (p.email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(p.email))) || !difficulties.includes(p.dificuldade)) throw new Error('Dados inválidos');
     } else if (!p.nome || p.nome.length > 160 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(p.email || '') || (p.email || '').length > 254 || !p.telefone || p.telefone.length > 40 || !INVESTMENTS.includes(p.investimento) || !Array.isArray(situations) || !situations.length || situations.length > 4 || situations.some(s => !SITUATIONS.includes(s))) {
       throw new Error('Dados inválidos');
     }
@@ -42,7 +42,7 @@ function doPost(e) {
     lock.waitLock(20000);
     try {
       const tab=sheet();
-      if(!exists(tab,p.request_id)) tab.appendRow([p.request_id,new Date(),safeCell(p.nome),safeCell(simple ? '' : p.email),safeCell(p.telefone),safeCell(simple ? '' : p.investimento),safeCell(situations.join(' | ')),...['page','utm_source','utm_medium','utm_campaign','utm_content','utm_term'].map(k=>safeCell(p[k]))]);
+      if(!exists(tab,p.request_id)) tab.appendRow([p.request_id,new Date(),safeCell(p.nome),safeCell(p.email),safeCell(p.telefone),safeCell(simple ? '' : p.investimento),safeCell(situations.join(' | ')),...['page','utm_source','utm_medium','utm_campaign','utm_content','utm_term'].map(k=>safeCell(p[k]))]);
       SpreadsheetApp.flush();
     } finally {lock.releaseLock();}
     return ContentService.createTextOutput('received');

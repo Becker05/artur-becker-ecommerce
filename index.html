@@ -1300,6 +1300,7 @@ main > .section.wrap .checks,
   <form id="diagnostico-form">
     <div class="form-contact">
       <label>Seu nome<input name="nome" autocomplete="name" required maxlength="160"></label>
+      <label>E-mail<input type="email" name="email" autocomplete="email" required maxlength="254"></label>
       <label>WhatsApp com DDD<input type="tel" name="telefone" autocomplete="tel" placeholder="(11) 99999-9999" required maxlength="40"></label>
       <label>Qual é sua principal dificuldade?
         <select name="dificuldade" required>
@@ -1387,7 +1388,7 @@ main > .section.wrap .checks,
       window.location.assign(new URL(THANK_YOU_URL, window.location.href).href);
     };
     const parts = normalizeName(lead.nome).split(' ').filter(Boolean);
-    const matching = {};
+    const matching = {em:lead.email.toLowerCase()};
     const phone = normalizePhone(lead.telefone);
     if(phone) matching.ph = phone;
     if(parts.length) matching.fn = parts[0];
@@ -1470,7 +1471,7 @@ main > .section.wrap .checks,
       const query = new URLSearchParams(location.search);
       pending = {
         request_id:requestId(),
-        form_version:'lp2_v2',nome,telefone,
+        form_version:'lp2_v2',nome,telefone,email:fd.get('email').trim(),
         dificuldade:fd.get('dificuldade'),
         website_check:'',page:location.origin+location.pathname,
         ...Object.fromEntries(['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].map(k=>[k,(query.get(k)||'').slice(0,500)]))
