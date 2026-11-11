@@ -27,17 +27,28 @@
     .button:hover{background:#d95513}a:focus-visible{outline:3px solid #00a6a6;outline-offset:5px}
     footer{border-top:1px solid #393d3f;padding:22px 0;color:#a9b0af;font-size:13px}
     @media(max-width:600px){main{padding-block:54px}.wrap{width:calc(100% - 36px)}.button{width:100%}h1{font-size:44px}.brand small{font-size:11px}}
+    main.wrap{width:min(540px,calc(100% - 36px));text-align:center}
+    main .status{justify-content:center}
+    main h1{font-size:clamp(32px,6vw,50px);margin:14px 0 8px}
+    main > p{margin:0;font-size:17px}
+    .next{border:1px solid #72513b;border-radius:14px;background:#211c19;padding:20px;margin:22px 0 0}
+    .next .button{display:flex;width:100%;margin:14px 0 0;background:#ffbf2e;color:#17191a;padding:12px 16px;min-height:48px}
+    .next .button:hover{background:#ffd05b}
+    .next p{font-size:14px;margin:12px 0 0}
   </style>
 </head>
 <body>
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M5XRQMWS" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <header><div class="wrap"><a class="brand" href="./" aria-label="Artur Becker, página inicial"><span class="mark">AB</span><span><strong>ARTUR BECKER</strong><small>Diagnóstico &amp; Dados para E-commerce</small></span></a></div></header>
   <main class="wrap">
-    <div class="status"><span class="check" aria-hidden="true">✓</span>Solicitação recebida</div>
-    <h1>Obrigado por compartilhar<br><span>o cenário da sua loja.</span></h1>
-    <p>Entrarei em contato pelo WhatsApp para agendar a reunião do diagnóstico gratuito.</p>
-    <div class="next"><strong>E agora?</strong><p>Acompanhe o WhatsApp informado no formulário. Você não precisa enviar uma nova solicitação.</p></div>
-    <a class="button" href="./">Voltar para a página inicial <span aria-hidden="true">↗</span></a>
+    <div class="status">Diagnóstico gratuito para e-commerce</div>
+    <h1>Recebi sua solicitação.</h1>
+    <p>Vou entrar em contato pelo WhatsApp para agendar a reunião do seu diagnóstico gratuito.</p>
+    <div class="next">
+      <strong>Quer falar comigo agora?</strong>
+      <a class="button" href="https://wa.me/5511995446469?text=Ol%C3%A1%2C%20Artur%21%20Acabei%20de%20solicitar%20o%20diagn%C3%B3stico%20gratuito%20da%20minha%20loja%20e%20quero%20conversar%20sobre%20o%20agendamento.">Chamar no WhatsApp</a>
+      <p>Se preferir, aguarde meu contato no número que você informou.</p>
+    </div>
   </main>
   <footer><div class="wrap">Artur Becker · Diagnóstico &amp; Dados para E-commerce</div></footer>
 </body>
