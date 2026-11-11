@@ -1478,6 +1478,13 @@ main > .section.wrap .checks,
     }
     button.disabled=true;
     status.textContent='Enviando sua solicitação…';
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: 'diagnostico_form_submit',
+      form_id: 'diagnostico_ecommerce',
+      event_id: pending.request_id,
+      dificuldade: pending.dificuldade
+    });
     try {
       // no-cors não confirma a gravação. Apenas a consulta de status libera o sucesso.
       fetch(ENDPOINT,{method:'POST',mode:'no-cors',body:new URLSearchParams(pending),credentials:'omit'}).catch(() => {});
